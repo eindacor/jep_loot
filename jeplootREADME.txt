@@ -1,4 +1,9 @@
-jeploot library README
+----------------------------------------------------------------------------------------------------
+					jeploot library README
+----------------------------------------------------------------------------------------------------
+
+
+To use this library, source code must #include "jeploot.h"
 
 
 Function				Description
