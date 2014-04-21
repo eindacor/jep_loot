@@ -9,7 +9,8 @@ g++ -fPIC -c jeploot.cpp
 g++ -shared -o libjeploot.so jeploot.o
 
 To use this library, source code must #include "jeploot.h", and the file 
-libjeploot.so must be placed in your shared library directory.
+libjeploot.so must be placed in your shared library directory. When compiling 
+your object/program, be sure to link the library with -ljeploot.
 
 
 Function                         Description
