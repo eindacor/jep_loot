@@ -4,6 +4,7 @@
 To build this as a shared library for Linux from the source file, use the following:
 
 `g++ -fPIC -c jeploot.cpp`
+
 `g++ -shared -o libjeploot.so jeploot.o`
 
 To use this library, source code must `#include` "jeploot.h", and the file
