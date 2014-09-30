@@ -1,7 +1,5 @@
 
-###jeploot library README
-----
-This library contains miscellaneous functions for the creation of a "loot" system in games.
+####This library contains miscellaneous functions for the creation of a "loot" system in games.
 ----
 To build this as a shared library for Linux from the source file, use the following:
 
