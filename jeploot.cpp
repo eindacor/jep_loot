@@ -1,6 +1,7 @@
 #include <time.h>
 #include <cstdarg>
 #include <stdlib.h>
+#include <vector>
 
 namespace jep
 {
@@ -34,25 +35,26 @@ namespace jep
 
 	int catRoll(int n, ...)
 	{
-		int ranges[n];
+		std::vector<int> ranges;
 
 		int seedRange=0;
 
 		va_list ratios;
 		va_start (ratios, n);
 
-		for (int i=0; i<n; i++)
+		for (std::vector<int>::iterator i = ranges.begin(); i != ranges.end(); i++)
 		{
 			seedRange += va_arg(ratios, int);
-			ranges[i] = seedRange;
+			ranges.push_back(seedRange);
 		}
+
 		va_end (ratios);
 
 		int seed = intRoll(1, seedRange);
 		
 		for (int i=0; i<n; i++)
 		{
-			if (seed <= ranges[i])
+			if (seed <= ranges.at(i))
 				return (i+1);
 		}	
 	}
