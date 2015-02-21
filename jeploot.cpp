@@ -22,16 +22,34 @@ namespace jep
 		return (rand() % 1000 < chance * 1000);
 	}
 
-	int intRoll(int n1, int n2)
+	int intRoll(int min, int max)
 	{
-		if (n1==n2)
-			return n1;
+		if (min == max)
+			return min;
 
-		if (n1<n2)
-			return n1 + (rand() % (1+n2-n1));
+		if (min<max)
+			return min + (rand() % (1 + max - min));
 
-		if (n2<n1)
-			return n2 + (rand() % (1+n1-n2));
+		if (max<min)
+			return max + (rand() % (1 + min - max));
+	}
+
+	const float floatRoll(float min, float max, int precision)
+	{
+		float lower = (min<max ? min : max);
+		float upper = (min<max ? max : min);
+
+		float zero_offset = lower;
+		lower -= zero_offset;
+		upper -= zero_offset;
+
+		double precision_multiplier = pow(10, precision);
+		unsigned int max_int = int(upper * precision_multiplier);
+
+		int random_number = rand() % (max_int + 1);
+		float random_float = float(random_number) / precision_multiplier;
+		random_float += zero_offset;
+		return random_float;
 	}
 
 	int catRoll(int n, ...)
