@@ -11,17 +11,19 @@ namespace jep
 		srand(time(NULL));
 	}
 
-	bool booRoll(double chance)
+	//has a d% chance to return true
+	bool booRoll(double d)
 	{
-		if (chance >= 1)
+		if (d >= 1)
 			return true;
 
-		if (chance == 0)
+		if (d == 0)
 			return false;
 
-		return (rand() % 1000 < chance * 1000);
+		return (rand() % 1000 < d * 1000);
 	}
 
+	//returns a random int i such that min <= i <= max
 	int intRoll(int min, int max)
 	{
 		if (min == max)
@@ -34,6 +36,7 @@ namespace jep
 			return max + (rand() % (1 + min - max));
 	}
 
+	//returns a random float f such that min <= f <= max, with the specified precision
 	const float floatRoll(float min, float max, int precision)
 	{
 		float lower = (min<max ? min : max);
@@ -76,6 +79,46 @@ namespace jep
 			if (seed <= ranges.at(i))
 				return (i+1);
 		}	
+	}
+
+	int catRoll(std::vector<int> proportions)
+	{
+		std::vector<int> ranges;
+		int seedRange = 0;
+
+		for (std::vector<int>::iterator i = proportions.begin(); i != proportions.end(); i++)
+		{
+			seedRange += *i;
+			ranges.push_back(seedRange);
+		}
+
+		int seed = intRoll(1, seedRange);
+
+		for (int i = 0; i<ranges.size(); i++)
+		{
+			if (seed <= ranges.at(i))
+				return (i + 1);
+		}
+	}
+
+	int catRoll(std::vector<int> proportions)
+	{
+		std::vector<int> ranges;
+		int seedRange = 0;
+
+		for (std::vector<int>::iterator i = proportions.begin(); i != proportions.end(); i++)
+		{
+			seedRange += *i;
+			ranges.push_back(seedRange);
+		}
+
+		int seed = intRoll(1, seedRange);
+
+		for (int i = 0; i<ranges.size(); i++)
+		{
+			if (seed <= ranges.at(i))
+				return (i + 1);
+		}
 	}
 
 }
