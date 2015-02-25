@@ -17,7 +17,7 @@ namespace jep
 		if (d >= 1)
 			return true;
 
-		if (d == 0)
+		if (d <= 0)
 			return false;
 
 		return (rand() % 1000 < d * 1000);
