@@ -100,25 +100,4 @@ namespace jep
 				return (i + 1);
 		}
 	}
-
-	int catRoll(std::vector<int> proportions)
-	{
-		std::vector<int> ranges;
-		int seedRange = 0;
-
-		for (std::vector<int>::iterator i = proportions.begin(); i != proportions.end(); i++)
-		{
-			seedRange += *i;
-			ranges.push_back(seedRange);
-		}
-
-		int seed = intRoll(1, seedRange);
-
-		for (int i = 0; i<ranges.size(); i++)
-		{
-			if (seed <= ranges.at(i))
-				return (i + 1);
-		}
-	}
-
 }
