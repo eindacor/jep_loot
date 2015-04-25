@@ -28,12 +28,11 @@ namespace jep
 	{
 		if (min == max)
 			return min;
+			
+		int upper = (min < max ? max : min);
+		int lower = (min < max ? min : max);
 
-		if (min<max)
-			return min + (rand() % (1 + max - min));
-
-		if (max<min)
-			return max + (rand() % (1 + min - max));
+		return lower + (rand() % (1 + upper - lower));
 	}
 
 	//returns a random float f such that min <= f <= max, with the specified precision
@@ -59,20 +58,20 @@ namespace jep
 	{
 		std::vector<int> ranges;
 
-		int seedRange=0;
+		int seed_range=0;
 
 		va_list ratios;
 		va_start (ratios, n);
 
 		for (std::vector<int>::iterator i = ranges.begin(); i != ranges.end(); i++)
 		{
-			seedRange += va_arg(ratios, int);
-			ranges.push_back(seedRange);
+			seed_range += va_arg(ratios, int);
+			ranges.push_back(seed_range);
 		}
 
 		va_end (ratios);
 
-		int seed = intRoll(1, seedRange);
+		int seed = intRoll(1, seed_range);
 		
 		for (int i=0; i<n; i++)
 		{
@@ -84,15 +83,15 @@ namespace jep
 	int catRoll(std::vector<int> proportions)
 	{
 		std::vector<int> ranges;
-		int seedRange = 0;
+		int seed_range = 0;
 
 		for (std::vector<int>::iterator i = proportions.begin(); i != proportions.end(); i++)
 		{
-			seedRange += *i;
-			ranges.push_back(seedRange);
+			seed_range += *i;
+			ranges.push_back(seed_range);
 		}
 
-		int seed = intRoll(1, seedRange);
+		int seed = intRoll(1, seed_range);
 
 		for (int i = 0; i<ranges.size(); i++)
 		{
