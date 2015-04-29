@@ -11,12 +11,12 @@ namespace jep
 	const float floatRoll(float min, float max, int precision);
 
 	template <typename T>
-	const T catRoll(const std::map<T, signed short> &m)
+	const T catRoll(const std::map<T, unsigned int> &m)
 	{
-		std::vector<signed short> ranges;
+		std::vector<unsigned int> ranges;
 		int seedRange = 0;
 
-		for (std::map<T, signed short>::const_iterator it = m.begin(); it != m.end(); it++)
+		for (std::map<T, unsigned int>::const_iterator it = m.begin(); it != m.end(); it++)
 		{
 			seedRange += it->second;
 			ranges.push_back(seedRange);
@@ -24,8 +24,8 @@ namespace jep
 
 		int random_number = rand() % seedRange;
 
-		std::map<T, signed short>::const_iterator to_return = m.begin();
-		for (std::vector<signed short>::const_iterator it = ranges.begin(); it != ranges.end(); it++)
+		std::map<T, unsigned int>::const_iterator to_return = m.begin();
+		for (std::vector<unsigned int>::const_iterator it = ranges.begin(); it != ranges.end(); it++)
 		{
 			if (random_number < (*it))
 				return ((*to_return).first);
